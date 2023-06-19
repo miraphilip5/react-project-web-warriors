@@ -1,8 +1,18 @@
-import { useState } from 'react';
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, IconButton, Typography } from '@mui/material';
-import DeleteIcon from '@mui/icons-material/Delete';
-import AddIcon from '@mui/icons-material/Add';
-import RemoveIcon from '@mui/icons-material/Remove';
+import { useState } from "react";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper,
+  IconButton,
+  Typography,
+} from "@mui/material";
+import DeleteIcon from "@mui/icons-material/Delete";
+import AddIcon from "@mui/icons-material/Add";
+import RemoveIcon from "@mui/icons-material/Remove";
 
 interface FlowerItem {
   id: string;
@@ -19,7 +29,6 @@ interface CartProps {
 }
 
 const Cart = ({ items, onDelete, onIncreaseQuantity }: CartProps) => {
-
   // const handleDelete = (id: string) => {
   //   onDelete(id);
   // };
@@ -33,9 +42,9 @@ const Cart = ({ items, onDelete, onIncreaseQuantity }: CartProps) => {
   // };
 
   const [flowerItems, setFlowerItems] = useState([
-    { id: '1', name: 'Rose', count: 3, price: 5.99 },
-    { id: '2', name: 'Tulip', count: 2, price: 3.99 },
-    { id: '3', name: 'Lily', count: 1, price: 7.99 },
+    { id: "1", name: "Rose", count: 3, price: 5.99 },
+    { id: "2", name: "Tulip", count: 2, price: 3.99 },
+    { id: "3", name: "Lily", count: 1, price: 7.99 },
   ]);
 
   const handleDelete = (id: string) => {
@@ -58,18 +67,20 @@ const Cart = ({ items, onDelete, onIncreaseQuantity }: CartProps) => {
 
   const handleReduceQuantity = (id: string) => {
     setFlowerItems((prevItems) =>
-      prevItems.map((item) => {
-        if (item.id === id) {
-          const updatedCount = item.count - 1;
-          if (updatedCount >= 0) {
-            return {
-              ...item,
-              count: updatedCount,
-            };
+      prevItems
+        .map((item) => {
+          if (item.id === id) {
+            const updatedCount = item.count - 1;
+            if (updatedCount >= 0) {
+              return {
+                ...item,
+                count: updatedCount,
+              };
+            }
           }
-        }
-        return item;
-      }).filter((item) => item.count !== 0)
+          return item;
+        })
+        .filter((item) => item.count !== 0)
     );
   };
 
@@ -99,13 +110,22 @@ const Cart = ({ items, onDelete, onIncreaseQuantity }: CartProps) => {
               <TableCell align="center">{item.count}</TableCell>
               <TableCell align="center">{item.price}</TableCell>
               <TableCell align="center">
-                <IconButton aria-label="Reduce Quantity" onClick={() => handleReduceQuantity(item.id)}>
+                <IconButton
+                  aria-label="Reduce Quantity"
+                  onClick={() => handleReduceQuantity(item.id)}
+                >
                   <RemoveIcon />
                 </IconButton>
-                <IconButton aria-label="Increase Quantity" onClick={() => handleIncreaseQuantity(item.id)}>
+                <IconButton
+                  aria-label="Increase Quantity"
+                  onClick={() => handleIncreaseQuantity(item.id)}
+                >
                   <AddIcon />
                 </IconButton>
-                <IconButton aria-label="Delete" onClick={() => handleDelete(item.id)}>
+                <IconButton
+                  aria-label="Delete"
+                  onClick={() => handleDelete(item.id)}
+                >
                   <DeleteIcon />
                 </IconButton>
               </TableCell>
@@ -113,7 +133,12 @@ const Cart = ({ items, onDelete, onIncreaseQuantity }: CartProps) => {
           ))}
         </TableBody>
       </Table>
-      <Typography variant="h6" component="p" align="right" style={{ margin: '10px' }}>
+      <Typography
+        variant="h6"
+        component="p"
+        align="right"
+        style={{ margin: "10px" }}
+      >
         Total Price: ${calculateTotalPrice()}
       </Typography>
     </TableContainer>
