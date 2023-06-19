@@ -15,9 +15,9 @@ const Navigation = () => {
     <nav>
       <ul>
         <li>
-          <NavLink to="/">Home</NavLink>
           {isLoggedIn ? (
             <>
+              <NavLink to="/flowers">Home</NavLink>
               <NavLink to="/orders">Orders</NavLink>
               <NavLink to="/cart">My Cart</NavLink>
               <button onClick={handleLogout}>Logout</button>
