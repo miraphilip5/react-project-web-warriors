@@ -65,9 +65,9 @@ const Login = () => {
         <Box
           sx={{
             marginTop: 8,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
           }}
         >
         <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
@@ -75,7 +75,7 @@ const Login = () => {
           </Avatar>
         <Typography sx= {{m:2}} component="h1" variant="h5">Sign In to Petal Express</Typography>
         {/* <p>Sign Into Your Account</p> */}
-        <form onSubmit={(e) => onSubmit(e)}>
+        <Box component="form" onSubmit={(e) => onSubmit(e)} sx={{ mt: 3 , width : 300 }}>
           <div>
             <TextField
               margin="normal"
@@ -111,7 +111,7 @@ const Login = () => {
             >
               Sign In
             </Button>
-        </form>
+        </Box>
         <p>
           <NavLink to="/register">Register</NavLink>
         </p>
