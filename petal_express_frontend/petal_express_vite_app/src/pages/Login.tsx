@@ -15,9 +15,9 @@ const Login = () => {
 
   const { email, password } = formData;
 
-  const onChange = (e) =>  setFormData({ ...formData, [e.target.name]: e.target.value });
+  const onChange = (e:any) =>  setFormData({ ...formData, [e.target.name]: e.target.value });
 
-  const onSubmit = async (e) => {
+  const onSubmit = async (e:any) => {
 
     e.preventDefault();
     let config = {

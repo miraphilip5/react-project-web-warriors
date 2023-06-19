@@ -24,8 +24,15 @@ const Flowers = () => {
   useEffect(() => {
     const fetchFlowersData = async () => {
       try {
+        const token = localStorage.getItem("token");
+        console.log("The token at front end is " + token);
         const { data: response } = await axios.get(
-          `http://localhost:${SERVER_PORT}/api/flowers`
+          `http://localhost:${SERVER_PORT}/api/flowers`,
+          {
+            headers: {
+              Authorization: `${token}`,
+            },
+          }
         );
         setFlowers(response);
       } catch (error) {
