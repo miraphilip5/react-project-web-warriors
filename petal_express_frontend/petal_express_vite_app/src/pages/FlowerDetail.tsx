@@ -71,7 +71,7 @@ const FlowerDetail = () => {
     return (
         <>
             <div className="back-to-home">
-                <Link to="/">Back to HomePage</Link>
+                <Link to="/flowers">Back to HomePage</Link>
             </div>
             {flower ?
                 (
