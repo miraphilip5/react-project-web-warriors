@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import axios from "axios";
 import decode from "jwt-decode";
@@ -38,33 +38,23 @@ const Register = () => {
   const onChange = (e : any) => {
     setValidationError("");
     setFormData({ ...formData, [e.target.name]: e.target.value });
-    // console.log(e.target.value);
-    // console.log(formData);
-    // console.log("password is " + password);
-    // console.log("password2 is " + e.target.value);
-    // console.log("validation error is " + validationError);
 
-    //check length of password to be atleast 6 characters long 
-    //important: using e.target.value from form submission instead of password(formData.password) Why?
+    //why use validation inside useEffect and not here?
     //its because setFormData is asynchronous which only gets updated after the end of onChange function execution
-    // this means if password is 123456, formData.password stores 12345 (not the latest value) in comparison to e.target.value storing 123456
-    if (e.target.name==="password" && e.target.value.length < 6) {
-      setValidationError("Password should be at least 6 characters long!");
-      return;
-    }
-    //for the 2nd password field as well, since we need to check for length when this is updated as well
-    if (e.target.name==="password2" && e.target.value.length < 6) {
-      setValidationError("Password should be at least 6 characters long!");
-      return;
-    }
-    
-    // check both passwords match
-    if (e.target.name==="password2" && e.target.value !== password) {
-      setValidationError("Passwords must match!");
-      return;
-    }
-
+    // this means if password is 123456, formData.password stores 12345 (not the latest value)
+    //useEffect solves this by getting the latest state
   };
+
+  useEffect(() => {
+    if (password && password.length < 6) {
+      setValidationError("Password should be at least 6 characters long!");
+      return;
+    }else if(password2 !== password){
+      setValidationError("Passwords must match!");
+    }else{
+      setValidationError("");
+    }
+  },[name,email,password,password2]);
 
   const onSubmit = async (e : any) => {
     e.preventDefault();
