@@ -22,14 +22,18 @@ const Login = () => {
   const [isJustRegistered, setIsJustRegistered] = useState<boolean>(false);
 
   useEffect(() => {
-    const localIsRegistered = localStorage.getItem("isJustRegistered");
+    let localIsRegistered = localStorage.getItem("isJustRegistered");
     if (localIsRegistered === "true") {
       //storing the true value in a local variable (local to the login file)
       setIsJustRegistered(true);
       // reset the localStorage variable back to false
       localStorage.setItem("isJustRegistered", "false");
+    }else{
+      localIsRegistered = "false";
     }
-  }, []);
+  });
+  //state to store login error
+  const [loginError, setloginError] = useState("");
 
   //state variables for form data
   const [formData, setFormData] = useState({
@@ -44,7 +48,8 @@ const Login = () => {
 
   const onSubmit = async (e: any) => {
     e.preventDefault();
-
+    //remove the msg about registration successful when the login form is submitted
+    setIsJustRegistered(false);
     let config = {
       headers: {
         "Content-Type": "application/json",
@@ -67,6 +72,7 @@ const Login = () => {
       //console.log(decode(response.data.token));
       navigate("/flowers");
     } catch (e) {
+      setloginError("Invalid Credentials!");
       console.log(e);
     }
   };
@@ -124,8 +130,21 @@ const Login = () => {
             </div>
             {/* display registration success msg if the user is redirected to the login page after successful registration */}
             {isJustRegistered && (
-              <Typography variant="body2" sx={{ color: "green" }} align="center">
+              <Typography
+                variant="body2"
+                sx={{ color: "green" }}
+                align="center"
+              >
                 Registration Successful!
+              </Typography>
+            )}
+            {loginError && (
+              <Typography
+                variant="body2"
+                color="error"
+                align="center"
+              >
+                {loginError}
               </Typography>
             )}
             <Button

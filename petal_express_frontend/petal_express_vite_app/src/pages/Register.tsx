@@ -46,6 +46,8 @@ const Register = () => {
   };
 
   useEffect(() => {
+    console.log(password);
+    console.log(password2);
     if (password && password.length < 6) {
       setValidationError("Password should be at least 6 characters long!");
       return;
@@ -59,7 +61,6 @@ const Register = () => {
   const onSubmit = async (e : any) => {
     e.preventDefault();
     
-    console.log("validate error on submit function " + validationError);
     //don't let the user submit the registration form if there is any validation error
     if (validationError!=="") {return};
 
