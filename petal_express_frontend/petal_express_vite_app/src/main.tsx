@@ -9,6 +9,7 @@ import Orders from "./pages/Orders";
 import Cart from "./pages/Cart";
 import Logout from "./pages/Logout";
 import Flowers from "./pages/Flowers";
+import FlowerDetail from "./pages/FlowerDetail"
 
 const router = createBrowserRouter([
   {
@@ -18,6 +19,7 @@ const router = createBrowserRouter([
       { index: true, element: <Login /> },
       { path: "register", element: <Register /> },
       { path: "flowers", element: <Flowers /> },
+      { path: "flower/:f_id", element: <FlowerDetail /> },
       { path: "login", element: <Login /> },
       { path: "logout", element: <Logout /> },
       { path: "orders", element: <Orders /> },
