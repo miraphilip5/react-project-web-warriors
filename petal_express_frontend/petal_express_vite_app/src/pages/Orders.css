@@ -1,0 +1,23 @@
+.orders-page {
+  padding: 20px;
+}
+
+.order-item {
+  background-color: #f5f5f5;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.flower-item {
+  background-color: #ffffff;
+  padding: 10px;
+  margin-bottom: 5px;
+}
+
+.status-column {
+  margin-top: 10px;
+}
+
+.flower-list {
+  margin-top: 10px;
+}
