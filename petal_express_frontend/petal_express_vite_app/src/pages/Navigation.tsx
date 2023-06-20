@@ -1,4 +1,21 @@
 import { NavLink, useNavigate } from "react-router-dom";
+
+// mui imports
+import Button from "@mui/material/Button";
+import Toolbar from "@mui/material/Toolbar";
+import Typography from "@mui/material/Typography";
+import AppBar from "@mui/material/AppBar";
+import { styled } from "@mui/material/styles";
+
+const StyledNavLink = styled(NavLink)`
+  color: white;
+  margin-right: 30px;
+  text-decoration: none;
+  &.active {
+    font-weight: bold;
+  }
+`;
+
 const Navigation = () => {
   const navigate = useNavigate();
 
@@ -12,25 +29,45 @@ const Navigation = () => {
   const isLoggedIn = !!localStorage.getItem("token");
 
   return (
-    <nav>
-      <ul>
-        <li>
+    <AppBar position="static" sx={{ backgroundColor: "#9c27b0" }}>
+      <Toolbar>
+        <Typography
+          variant="h6"
+          component="div"
+          sx={{ flexGrow: 1, textAlign: "left" }}
+        >
+          Petal Express
+        </Typography>
+        <nav>
           {isLoggedIn ? (
             <>
-              <NavLink to="/flowers">Home</NavLink>
-              <NavLink to="/orders">Orders</NavLink>
-              <NavLink to="/cart">My Cart</NavLink>
-              <button onClick={handleLogout}>Logout</button>
+              <StyledNavLink to="/flowers">Home</StyledNavLink>
+              <StyledNavLink to="/orders">Orders</StyledNavLink>
+              <StyledNavLink to="/cart">My Cart</StyledNavLink>
+              <Button
+                color="inherit"
+                onClick={handleLogout}
+                sx={{
+                  marginLeft: "10px",
+                  fontWeight: "bold",
+                  backgroundColor: "black",
+                  "&:hover": {
+                    backgroundColor: "maroon",
+                    color: "white",
+                  },
+                }}
+              >
+                Logout
+              </Button>
             </>
           ) : (
             <>
-              <NavLink to="/login">Login</NavLink>
+              <StyledNavLink to="/login">Login</StyledNavLink>
             </>
           )}
-        </li>
-        <li>{/* <NavLink to="/flowers">Flowers</NavLink> */}</li>
-      </ul>
-    </nav>
+        </nav>
+      </Toolbar>
+    </AppBar>
   );
 };
 export default Navigation;

@@ -1,5 +1,6 @@
 import { Outlet, useLocation } from "react-router-dom";
 import Navigation from "./pages/Navigation";
+import Footer from "./pages/Footer";
 
 import "./App.css";
 const App = () => {
@@ -13,6 +14,7 @@ const App = () => {
     <div>
       {!hideNavigation && <Navigation />}
       <Outlet />
+      <Footer />
     </div>
   );
 };
