@@ -52,6 +52,20 @@ const getFlowers = [authenticatedUser, asyncHandler(async (req, res) => {
   res.status(200).json(flowers);
 })];
 
+//Kaiyan
+//@route GET /api/flowers/:f_id
+const getFlowerById = [authenticatedUser,asyncHandler(async (req, res) => {
+  const flowerId = req.params.f_id;
+  const flower = await flowerModel.findOne({ f_id: flowerId }).exec();
+
+  // if id not found in the db
+  if (!flower) {
+    res.status(400);
+    //throw new Error(`The flower with id ${objectId} doesn't exist!`);
+  }
+  res.status(200).json(flower);
+})];
+
 //  @route POST /api/flowers
 const addFlower = [authenticatedUser,asyncHandler(async (req, res) => {
   const { f_id, name, category, color, price, stock, description, image } =
@@ -101,4 +115,4 @@ const deleteFlowerById = [authenticatedUser,asyncHandler(async (req, res) => {
   res.status(200).json(deletedFlower);
 })];
 
-module.exports = { getFlowers, addFlower, updateFlowerById, deleteFlowerById };
+module.exports = { getFlowers, addFlower, updateFlowerById, deleteFlowerById, getFlowerById, authenticatedUser };

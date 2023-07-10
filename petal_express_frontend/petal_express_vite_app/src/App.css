@@ -40,3 +40,109 @@
 .read-the-docs {
   color: #888;
 }
+
+/*flowers*/
+.flowers {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.flowers li {
+  list-style-type: none;
+  padding: 0;
+  flex: 0 1 20rem;
+  margin: 2rem;
+  height: 50rem;
+  border-bottom: .1rem #c0c0c0 solid;
+}
+.flower{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+.flower-name{
+  font-size: 2rem;
+  font-weight: bold;
+}
+.flower-name a{
+  color: black;
+}
+.flower-category{
+  font-size: 1.2rem;
+  color:#808080;
+}
+.flower-price{
+  font-size: 2rem;
+  font-weight: bold;
+}
+.flower-image{
+  max-width: 20rem;
+}
+.flower-description{
+  margin-bottom: 1rem;
+}
+
+/*flowerDetail*/
+.details{
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  padding: 1rem;
+}
+.details-image{
+  flex: 1 1 20rem;
+}
+.details-image img{
+  max-width: 20rem;
+  width: 100%;
+}
+.details-info {
+  flex: 1 1 10rem;
+}
+.details-action{
+  flex: 1 1 6rem;
+}
+.details-info ul, .details-action ul{
+  list-style-type: none;
+   padding: 0;
+}
+.details-info li, .details-action li{
+  margin-bottom: 1rem;
+}
+.back-to-home{
+  padding: 1rem; 
+}
+.details-action{
+  border: .1rem #808080 solid;
+  border-radius: 0.5rem;
+  background-color: #f8f8f8;
+  padding: 1rem;
+}
+.details-action ul li:last-child{
+  display: flex;
+  flex-direction: column;
+}
+.button{
+  padding: 1rem;
+  border: .1rem #808080 solid;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  background-color: pink;
+}
+.button:hover{
+  border: .1rem #404040 solid;
+}
+.button.primary{
+  background-color: pink;
+}
+.button.secondary {
+  background-color: #f0f0f0;
+}
+.text-center {
+  text-align: center;
+}
+
+

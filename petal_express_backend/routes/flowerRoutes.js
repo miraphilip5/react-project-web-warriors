@@ -1,10 +1,13 @@
 const express = require("express");
 const router = express.Router();
 
-const { getFlowers, addFlower, updateFlowerById, deleteFlowerById } = require("../controllers/flowerController");
+const { getFlowers, addFlower, updateFlowerById, deleteFlowerById, getFlowerById } = require("../controllers/flowerController");
 
 //get all flowers
 router.get("/", getFlowers);
+
+//get a flower
+router.get("/:f_id", getFlowerById);
 
 //post-insert a flower
 router.post("/", addFlower);

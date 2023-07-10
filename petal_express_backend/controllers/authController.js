@@ -8,9 +8,19 @@ let userModel = require("../models/userModel");
 
 const getLoggedInUser = ( auth, async (req, res) => {
     try {
+      const token = req.headers.authorization;
+      if (!token) {
+        return res.status(401).json({ msg: "No token, authorization denied" });
+      }
+  
+      const decoded = jwt.verify(token, process.env.JWT_SECRET);
       //use the user model to get user info except password
-      const user = await userModel.findById(req.user.id).select("-password");
-      res.json(user);
+      const user = await userModel.findById(decoded.user.id).select("-password");
+      if (!user) {
+        return res.status(401).json({ msg: "User not found" });
+      }
+  
+      res.json({ name: user.name });
     } catch (err) {
       console.error(err.message);
       res.status(500).send("server error");

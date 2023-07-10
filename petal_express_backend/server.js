@@ -2,7 +2,8 @@ const express = require('express')
 const dotenv = require('dotenv').config()
 const cors = require('cors')
 const server_port = process.env.SERVER_PORT || 8080;
-const connectDB = require('./config/db.js')
+const connectDB = require('./config/db.js');
+const orderRoute = require('./routes/orderRoutes.js');
 
 connectDB();
 const app = express()
@@ -23,5 +24,8 @@ app.use('/api/user', require('./routes/userRoute'));
 
 // apis - authenticate a user while login, get logged in user details
 app.use('/api/auth', require('./routes/authRoutes'));
+
+// apis to display routes for orders
+app.use('/api/orders', orderRoute);
 
 app.listen(server_port,()=>{console.log(`Server listening to port ${server_port}`)})
