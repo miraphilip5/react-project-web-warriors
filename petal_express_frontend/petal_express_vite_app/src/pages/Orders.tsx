@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react"
+import axios from "axios";
 import {
   Typography,
   Box,
@@ -7,6 +8,9 @@ import {
   ListItemText,
   Button,
 } from "@mui/material";
+import Snackbar from "@mui/material/Snackbar";
+import Alert from "@mui/material/Alert";
+import { SERVER_PORT } from "../config";
 
 import './Orders.css';
 
@@ -18,7 +22,8 @@ interface Flower {
 }
 
 interface Order {
-  id: string;
+  _id: string,
+  orderId: string;
   flowers: Flower[];
   status: string;
 }
@@ -26,52 +31,81 @@ interface OrdersProps {
   orders: Order[];
 }
 
-const Orders = ({}: /*orders*/ OrdersProps) => {
-  const sampleOrders: Order[] = [
-    {
-      id: "1",
-      flowers: [
-        {
-          id: "1",
-          name: "Rose",
-          quantity: 2,
-          price: 10,
-        },
-        {
-          id: "2",
-          name: "Lily",
-          quantity: 3,
-          price: 8,
-        },
-      ],
-      status: "Pending",
-    },
-    {
-      id: "2",
-      flowers: [
-        {
-          id: "3",
-          name: "Tulip",
-          quantity: 5,
-          price: 5,
-        },
-      ],
-      status: "Complete",
-    },
-  ];
+const Orders = ({}: OrdersProps) => {
 
-  const [orders, setOrders] = useState<Order[]>(sampleOrders);
+  const [orders, setOrders] = useState<Order[]>([]);
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
+  const token = localStorage.getItem("token");
 
-  const handleCancel = (orderId: string) => {
-    setOrders((prevOrders) =>
-      prevOrders.filter((order) => order.id !== orderId)
-    );
+  useEffect(() => {
+    const fetchOrders = async () => {
+      try {
+        // Make a GET request to fetch the orders from the API endpoint
+        const response = await axios.get(`${SERVER_PORT}/api/orders`,{
+          headers: {
+            Authorization: token,
+          },
+        });
+        
+        // Set the retrieved orders data to the component state
+        setOrders(response.data);
+      } catch (error) {
+        console.error("Error fetching orders:", error);
+      }
+    };
+  
+    fetchOrders();
+  }, []);
+
+  const handleCancel = async(orderId: string) => {
+    try {
+      // Make a PUT request to the cancel order API endpoint
+      await axios.put(`${SERVER_PORT}/api/orders/${orderId}/cancel`, null, {
+        headers: {
+          Authorization: token,
+        },
+      });
+      
+      // Update the status of the canceled order locally
+      setOrders((prevOrders) =>
+        prevOrders.map((order) => {
+          if (order._id === orderId) {
+            return { ...order, status: "Cancelled" };
+          }
+          return order;
+        })
+      );
+      setSnackbarOpen(true);
+    } catch (error) {
+      console.error("Error canceling order:", error);
+    }
   };
 
-  const handleRemove = (orderId: string) => {
-    setOrders((prevOrders) =>
-      prevOrders.filter((order) => order.id !== orderId)
-    );
+  const handleRemove = async(orderId: string) => {
+    try {
+      // Make a DELETE request to the remove order API endpoint
+      await axios.delete(`${SERVER_PORT}/api/orders/${orderId}`,{
+        headers: {
+          Authorization: token,
+        },
+      });
+      
+      // Remove the deleted order from the local orders state
+      setOrders((prevOrders) =>
+        prevOrders.filter((order) => order._id !== orderId)
+      );
+      setSnackbarOpen(true);
+    } catch (error) {
+      console.error("Error removing order:", error);
+    }
+  };
+
+  const calculateTotalPrice = (flowers: Flower[]) => {
+    let totalPrice = 0;
+    flowers.forEach((flower) => {
+      totalPrice += flower.quantity * flower.price;
+    });
+    return totalPrice.toFixed(2);
   };
 
   return (
@@ -84,9 +118,9 @@ const Orders = ({}: /*orders*/ OrdersProps) => {
       ) : (
         <List>
           {orders.map((order) => (
-            <ListItem key={order.id} className="order-item">
+            <ListItem key={order.orderId} className="order-item">
               <ListItemText
-                primary={`Order ID: ${order.id}`}
+                primary={`Order ID: ${order.orderId}`}
                 secondary={
                   <List className="flower-list">
                     {order.flowers.map((flower) => (
@@ -100,7 +134,7 @@ const Orders = ({}: /*orders*/ OrdersProps) => {
                               </Typography>
                               <br />
                               <Typography variant="body2" component="span">
-                                Price: ${flower.price}
+                                Price: ${flower.price} $
                               </Typography>
                             </Box>
                           }
@@ -110,20 +144,21 @@ const Orders = ({}: /*orders*/ OrdersProps) => {
                   </List>
                 }
               />
-              <ListItemText primary={`Status: ${order.status}`} className="status-column"  />
-              {order.status !== "Complete" && (
+              &nbsp;<ListItemText primary={`Status: ${order.status}`} className="status-column"  /> 
+              <ListItemText primary={` Order Total: ${calculateTotalPrice(order.flowers)} $`} className="status-column"  />
+              {order.status !== "Complete" && order.status !== "Cancelled" && (
                 <Button
                   variant="contained"
                   color="error"
-                  onClick={() => handleCancel(order.id)}>
+                  onClick={() => handleCancel(order._id)}>
                   Cancel Order
                 </Button>
               )}
-              {order.status == "Complete" && (
+              {(order.status == "Complete" ||  order.status == "Cancelled" ) && (
                 <Button
                   variant="contained"
                   color="primary"
-                  onClick={() => handleRemove(order.id)}>
+                  onClick={() => handleRemove(order._id)}>
                   Remove Order
                 </Button>
               )}
@@ -131,6 +166,11 @@ const Orders = ({}: /*orders*/ OrdersProps) => {
           ))}
         </List>
       )}
+      <Snackbar open={snackbarOpen} autoHideDuration={3000} onClose={() => setSnackbarOpen(false)}>
+          <Alert onClose={() => setSnackbarOpen(false)} severity="success" sx={{ width: '100%' }}>
+          Order Update Success
+          </Alert>
+        </Snackbar>
     </div>
   );
 };

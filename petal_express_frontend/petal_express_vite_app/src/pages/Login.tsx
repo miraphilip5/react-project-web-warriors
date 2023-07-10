@@ -63,7 +63,7 @@ const Login = () => {
 
     try {
       const response = await axios.post(
-        `http://localhost:${SERVER_PORT}/api/auth`,
+        `${SERVER_PORT}/api/auth`,
         data,
         config
       );
@@ -148,11 +148,10 @@ const Login = () => {
               </Typography>
             )}
             <Button
-              // value="Login"
               type="submit"
               fullWidth
               variant="contained"
-              sx={{ mt: 3, mb: 2 }}
+              sx={{ mt: 3, mb: 2, backgroundColor: '#9C27B0' }}
             >
               Sign In
             </Button>

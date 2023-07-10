@@ -11,12 +11,13 @@ import Logout from "./pages/Logout";
 import Flowers from "./pages/Flowers";
 import FlowerDetail from "./pages/FlowerDetail"
 
+const isLoggedIn = !!localStorage.getItem("token");
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
     children: [
-      { index: true, element: <Login /> },
+      { index: true, element: isLoggedIn? <Flowers /> : <Login /> },
       { path: "register", element: <Register /> },
       { path: "flowers", element: <Flowers /> },
       { path: "flower/:f_id", element: <FlowerDetail /> },

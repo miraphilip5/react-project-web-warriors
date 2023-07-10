@@ -74,7 +74,7 @@ const Register = () => {
 
     try {
       const response = await axios.post(
-        `http://localhost:${SERVER_PORT}/api/user`,
+        `${SERVER_PORT}/api/user`,
         data,
         config
       );
@@ -168,7 +168,7 @@ const Register = () => {
               onSubmit={(e) => onSubmit(e)}
               fullWidth
               variant="contained"
-              sx={{ mt: 3, mb: 2 }}
+              sx={{ mt: 3, mb: 2, backgroundColor: '#9C27B0' }}
             >
               Sign Up
             </Button>
