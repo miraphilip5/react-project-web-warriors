@@ -9,38 +9,6 @@ const jwt = require("jsonwebtoken");
 const auth = require("../middleware/authMiddleware");
 
 
-//Authentication middleware (only allow the access to the apis if the user is authenticated)
-// const authenticatedUser = asyncHandler(async (req,res,next) => {
-//   // get jwt from header
-//   // console.log(req.headers);
-//   let token = req.headers.authorization;
-//   console.log("The token at the backend is " + token);
-
-//   // to test: login via frontend, get token from console and paste it here and uncomment
-//   // token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjQ4ZjljZDYwMmQ5MmUwMDg4NzM2YTFhIiwibmFtZSI6IlNpbXRlc3QifSwiaWF0IjoxNjg3MTM5NDMwLCJleHAiOjE2OTQ5MTU0MzB9.9S-1yEEScw_Kmfsc2tw0kJK6MAhXneeB2lzvxo91ycY";
-//   //if no token i.e. user has not logged in
-//   if(!token) {
-//     res.status(400);
-//     throw new Error(`Not authorized, no token available!`);
-//   }
-
-//   //condition if the user is logged in with correct credentials (i.e. the token is valid)
-//   try{
-//     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-//      // Attach the decoded user information to the request object
-//      req.user = {
-//       name: decoded.name,
-//       email: decoded.email
-//     };
-//     next();
-//   }catch(error){
-//     res.status(401);
-//     throw new Error(`Not authorized, invalid token!`);
-//   }
-// });
-
-
-
 // since mongoose methods return a promise, we need to use async for all of these methods
 //  @route GET /api/flowers
 const getFlowers = [auth, asyncHandler(async (req, res) => {
@@ -55,7 +23,7 @@ const getFlowers = [auth, asyncHandler(async (req, res) => {
 
 //Kaiyan
 //@route GET /api/flowers/:f_id
-const getFlowerById = [authenticatedUser,asyncHandler(async (req, res) => {
+const getFlowerById = [auth,asyncHandler(async (req, res) => {
   const flowerId = req.params.f_id;
   const flower = await flowerModel.findOne({ f_id: flowerId }).exec();
 

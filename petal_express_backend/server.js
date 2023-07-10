@@ -24,4 +24,7 @@ app.use('/api/user', require('./routes/userRoute'));
 // apis - authenticate a user while login, get logged in user details
 app.use('/api/auth', require('./routes/authRoutes'));
 
+// api to display the routes for carts
+app.use('/api/carts', require('./routes/cartRoutes.js'))
+
 app.listen(server_port,()=>{console.log(`Server listening to port ${server_port}`)})
