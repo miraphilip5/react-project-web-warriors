@@ -115,4 +115,4 @@ const deleteFlowerById = [authenticatedUser,asyncHandler(async (req, res) => {
   res.status(200).json(deletedFlower);
 })];
 
-module.exports = { getFlowers, addFlower, updateFlowerById, deleteFlowerById, getFlowerById };
+module.exports = { getFlowers, addFlower, updateFlowerById, deleteFlowerById, getFlowerById, authenticatedUser };
