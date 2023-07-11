@@ -70,7 +70,7 @@ const FlowerDetail = () => {
 
   return (
     <>
-       {flower ? (
+      {flower ? (
         <div className="details">
           <div className="details-image">
             <img
@@ -132,9 +132,17 @@ const FlowerDetail = () => {
       ) : (
         <p>Loading...</p>
       )}
-      <Snackbar open={snackbarOpen} autoHideDuration={3000} onClose={() => setSnackbarOpen(false)}>
-        <Alert onClose={() => setSnackbarOpen(false)} severity="success" sx={{ width: '100%' }}>
-        Flower added to cart!
+      <Snackbar
+        open={snackbarOpen}
+        autoHideDuration={3000}
+        onClose={() => setSnackbarOpen(false)}
+      >
+        <Alert
+          onClose={() => setSnackbarOpen(false)}
+          severity="success"
+          sx={{ width: "100%" }}
+        >
+          Flower added to cart!
         </Alert>
       </Snackbar>
     </>

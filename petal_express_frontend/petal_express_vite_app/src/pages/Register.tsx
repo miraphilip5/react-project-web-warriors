@@ -85,7 +85,10 @@ const Register = () => {
       localStorage.setItem("isJustRegistered", "true");
       // Redirect to '/flowers' after successful registration
       navigate("/login");
-    } catch (e) {
+    } catch (e : any) {
+      //if email already exists, display the error during registration
+      if( e && e.response && e.response.data && e.response.data.error && e.response.data.error.length)
+        setValidationError(e.response.data.error[0].msg);
       console.log("error ", e);
     }
   };

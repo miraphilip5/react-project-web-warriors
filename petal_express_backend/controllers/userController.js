@@ -22,7 +22,7 @@ const registerUser = (
             //check if user email is already in the database
             let user1 = await userModel.findOne({ email: req.body.email });
             if (user1) {
-                return res.status(400).json({ error: [{ msg: "user already exists" }] });
+                return res.status(400).json({ error: [{ msg: "Email is already used!" }] });
             }
 
             //hash the password
