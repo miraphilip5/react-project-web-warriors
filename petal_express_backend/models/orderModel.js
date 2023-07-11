@@ -5,6 +5,10 @@ const orderSchema = mongoose.Schema({
     type: String,
     required: true,
   },
+  u_id: {
+    type: mongoose.Schema.Types.ObjectId,
+    required: true,
+  },
   flowers: [
     {
       flower: {

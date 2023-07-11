@@ -8,7 +8,8 @@ const placeOrder = [auth, asyncHandler(async (req, res) => {
   try {
     const { flowers } = req.body;
     const orderId = uuidv4(); // Generate a unique order ID
-    const order = await Order.create({ orderId, flowers });
+    const u_id = req.user.id;
+    const order = await Order.create({ orderId, u_id, flowers });
     res.status(201).json(order);
   } catch (error) {
     console.error('Error placing order:', error);
@@ -19,7 +20,8 @@ const placeOrder = [auth, asyncHandler(async (req, res) => {
 // Get all orders
 const getOrders = [auth, asyncHandler(async (req, res) => {
   try {
-    const orders = await Order.find().populate('flowers');
+    const u_id = req.user.id;
+    const orders = await Order.find({u_id}).populate('flowers').exec();
     res.status(200).json(orders);
   } catch (error) {
     console.error('Error getting orders:', error);
