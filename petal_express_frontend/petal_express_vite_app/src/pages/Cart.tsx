@@ -18,9 +18,6 @@ import Alert from "@mui/material/Alert";
 import DeleteIcon from "@mui/icons-material/Delete";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
-
-import { SERVER_PORT } from "../config";
-
 interface FlowerItem {
   _id: string;
   name: string;
@@ -52,7 +49,7 @@ const Cart = ({}: CartProps) => {
     const fetchFlowers = async () => {
       try {
         // Make a GET request to fetch the orders from the API endpoint
-        const response = await axios.get(`${SERVER_PORT}/api/carts`, {
+        const response = await axios.get(`${import.meta.env.VITE_SERVER_PORT}/api/carts`, {
           headers: {
             Authorization: token,
           },
@@ -69,7 +66,7 @@ const Cart = ({}: CartProps) => {
   }, []);
 
   const handleDelete = async (id: number) => {
-    await axios.delete(`${SERVER_PORT}/api/carts/${id}`, {
+    await axios.delete(`${import.meta.env.VITE_SERVER_PORT}/api/carts/${id}`, {
       headers: {
         Authorization: token,
       },
@@ -79,7 +76,7 @@ const Cart = ({}: CartProps) => {
 
   const handleIncreaseQuantity = async (id: number) => {
     await axios.put(
-      `${SERVER_PORT}/api/carts/${id}/increase`,
+      `${import.meta.env.VITE_SERVER_PORT}/api/carts/${id}/increase`,
       { operation: "increase" },
       {
         headers: {
@@ -102,7 +99,7 @@ const Cart = ({}: CartProps) => {
 
   const handleReduceQuantity = async (id: number) => {
     await axios.put(
-      `${SERVER_PORT}/api/carts/${id}/reduce`,
+      `${import.meta.env.VITE_SERVER_PORT}/api/carts/${id}/reduce`,
       { operation: "reduce" },
       {
         headers: {
@@ -145,7 +142,7 @@ const Cart = ({}: CartProps) => {
         price: item.price,
       }));
       await axios.post(
-        `${SERVER_PORT}/api/orders`,
+        `${import.meta.env.VITE_SERVER_PORT}/api/orders`,
         {
           flowers,
         },
@@ -164,7 +161,7 @@ const Cart = ({}: CartProps) => {
   const emptyCart = async () => {
     try {
       await axios.delete(
-        `${SERVER_PORT}/api/carts`,
+        `${import.meta.env.VITE_SERVER_PORT}/api/carts`,
         {
           headers: {
             Authorization: token,

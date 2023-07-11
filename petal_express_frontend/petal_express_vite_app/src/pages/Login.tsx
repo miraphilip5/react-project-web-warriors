@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { SERVER_PORT } from "../config";
 
 // mui libraries
 import { Typography } from "@mui/material";
@@ -63,7 +62,7 @@ const Login = () => {
 
     try {
       const response = await axios.post(
-        `${SERVER_PORT}/api/auth`,
+        `${import.meta.env.VITE_SERVER_PORT}/api/auth`,
         data,
         config
       );
