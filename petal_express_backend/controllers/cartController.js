@@ -40,7 +40,7 @@ const u_id = req.user.id;
 
       if (existingCart) {
         // Case1.1: If cart record with same u_id and same f_id exists, simply update its quantity
-        existingCart.quantity = quantity;
+        existingCart.quantity += quantity;
 
         // Save the updated cart
         await existingCart.save();
