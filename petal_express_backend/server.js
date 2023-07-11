@@ -27,6 +27,9 @@ app.use("/api/auth", require("./routes/authRoutes"));
 // api to display the routes for carts
 app.use("/api/carts", require("./routes/cartRoutes.js"));
 
+// apis to display routes for orders
+app.use("/api/orders", require("./routes/orderRoutes.js"));
+
 app.listen(server_port, () => {
   console.log(`Server listening to port ${server_port}`);
 });

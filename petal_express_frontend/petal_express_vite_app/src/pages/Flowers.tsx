@@ -22,49 +22,53 @@ interface FlowerProp {
 
 const Flowers = () => {
   const [flowers, setFlowers] = useState<FlowersProp>();
+  const [loggedInUser, setLoggedInUser] = useState("");
+
   useEffect(() => {
-
     const fetchFlowersData = async () => {
-
       try {
-
         const token = localStorage.getItem("token");
-
-        console.log("The token at front end is " + token);
-
         const { data: response } = await axios.get(
-
-          `http://localhost:${SERVER_PORT}/api/flowers`,
-
+          `${SERVER_PORT}/api/flowers`,
           {
-
             headers: {
-
               Authorization: `${token}`,
-
             },
-
           }
-
         );
-
         setFlowers(response);
-
       } catch (error) {
-
         console.error(error);
-
       }
-
     };
-
     fetchFlowersData();
-
   }, []);
+
+  useEffect(() => {
+    const fetchLoginUserData = async () => {
+      try {
+        const token = localStorage.getItem("token");
+        const { data: response } = await axios.get(
+          `${SERVER_PORT}/api/auth`,
+          {
+            headers: {
+              Authorization: `${token}`,
+            },
+          }
+        );
+        setLoggedInUser(response.name);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchLoginUserData();
+  }, []);
+
+  
 
   return (
     <>
-      <h1>Welcome to Petal Express!</h1>
+      <h1>Welcome to Petal Express! {loggedInUser}</h1>
       {flowers && flowers.length === 0 ? (
         <p>Loading...</p>
       ) : (
@@ -74,7 +78,7 @@ const Flowers = () => {
               <li key={flower._id}>
                 <div className="flower">
                   <Link to={'/flower/' + flower.f_id}>
-                    <img className="flower-image" src={"/images/flowers-1.jpg"} alt="flower" />
+                    <img className="flower-image" src={`/images/flowers-${flower.f_id}.jpg`} alt="flower" />
                   </Link>
                   <div className="flower-name">
                     <Link to={'/flower/' + flower.f_id}>{flower.name}</Link>

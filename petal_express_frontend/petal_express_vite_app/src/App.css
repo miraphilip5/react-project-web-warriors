@@ -1,9 +1,6 @@
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
   text-align: center;
-}
+} 
 
 .logo {
   height: 6em;
@@ -90,7 +87,7 @@
   justify-content: space-between;
   align-items: flex-start;
   flex-wrap: wrap;
-  padding: 1rem;
+  padding: 10rem;
 }
 .details-image{
   flex: 1 1 20rem;

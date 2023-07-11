@@ -25,9 +25,6 @@ const Navigation = () => {
     navigate("/login");
   };
 
-  // stores true if jwt exists else false (!! = converts to boolean)
-  const isLoggedIn = !!localStorage.getItem("token");
-
   return (
     <AppBar position="static" sx={{ backgroundColor: "#9c27b0" }}>
       <Toolbar>
@@ -39,7 +36,6 @@ const Navigation = () => {
           Petal Express
         </Typography>
         <nav>
-          {isLoggedIn ? (
             <>
               <StyledNavLink to="/flowers">Home</StyledNavLink>
               <StyledNavLink to="/orders">Orders</StyledNavLink>
@@ -60,11 +56,6 @@ const Navigation = () => {
                 Logout
               </Button>
             </>
-          ) : (
-            <>
-              <StyledNavLink to="/login">Login</StyledNavLink>
-            </>
-          )}
         </nav>
       </Toolbar>
     </AppBar>
