@@ -1,11 +1,9 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { SERVER_PORT } from "../config";
 import Button from "@mui/material/Button";
 import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
-
 interface FlowerProp {
   category: string;
   color: string;
@@ -30,7 +28,7 @@ const FlowerDetail = () => {
       try {
         const token = localStorage.getItem("token");
         const { data: response } = await axios.get(
-          `${SERVER_PORT}/api/flowers/${f_id}`,
+          `${import.meta.env.VITE_SERVER_PORT}/api/flowers/${f_id}`,
           {
             headers: {
               Authorization: `${token}`,
@@ -50,7 +48,7 @@ const FlowerDetail = () => {
     try {
       const token = localStorage.getItem("token");
       const response = await axios.post(
-        `${SERVER_PORT}/api/carts`,
+        `${import.meta.env.VITE_SERVER_PORT}/api/carts`,
         {
             f_id: flower?.f_id,
             quantity: parseInt(qty),

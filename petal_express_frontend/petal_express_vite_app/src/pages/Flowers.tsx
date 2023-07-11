@@ -2,8 +2,6 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
-import { SERVER_PORT } from "../config";
-
 interface FlowersProp {
   flowers: FlowerProp[];
 }
@@ -29,7 +27,7 @@ const Flowers = () => {
       try {
         const token = localStorage.getItem("token");
         const { data: response } = await axios.get(
-          `${SERVER_PORT}/api/flowers`,
+          `${import.meta.env.VITE_SERVER_PORT}/api/flowers`,
           {
             headers: {
               Authorization: `${token}`,
@@ -49,7 +47,7 @@ const Flowers = () => {
       try {
         const token = localStorage.getItem("token");
         const { data: response } = await axios.get(
-          `${SERVER_PORT}/api/auth`,
+          `${import.meta.env.VITE_SERVER_PORT}/api/auth`,
           {
             headers: {
               Authorization: `${token}`,

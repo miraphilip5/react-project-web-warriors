@@ -10,7 +10,6 @@ import {
 } from "@mui/material";
 import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
-import { SERVER_PORT } from "../config";
 
 import './Orders.css';
 
@@ -41,7 +40,7 @@ const Orders = ({}: OrdersProps) => {
     const fetchOrders = async () => {
       try {
         // Make a GET request to fetch the orders from the API endpoint
-        const response = await axios.get(`${SERVER_PORT}/api/orders`,{
+        const response = await axios.get(`${import.meta.env.VITE_SERVER_PORT}/api/orders`,{
           headers: {
             Authorization: token,
           },
@@ -60,7 +59,7 @@ const Orders = ({}: OrdersProps) => {
   const handleCancel = async(orderId: string) => {
     try {
       // Make a PUT request to the cancel order API endpoint
-      await axios.put(`${SERVER_PORT}/api/orders/${orderId}/cancel`, null, {
+      await axios.put(`${import.meta.env.VITE_SERVER_PORT}/api/orders/${orderId}/cancel`, null, {
         headers: {
           Authorization: token,
         },
@@ -84,7 +83,7 @@ const Orders = ({}: OrdersProps) => {
   const handleRemove = async(orderId: string) => {
     try {
       // Make a DELETE request to the remove order API endpoint
-      await axios.delete(`${SERVER_PORT}/api/orders/${orderId}`,{
+      await axios.delete(`${import.meta.env.VITE_SERVER_PORT}/api/orders/${orderId}`,{
         headers: {
           Authorization: token,
         },

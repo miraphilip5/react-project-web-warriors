@@ -3,8 +3,6 @@ import { NavLink, useNavigate } from "react-router-dom";
 import axios from "axios";
 import decode from "jwt-decode";
 
-import { SERVER_PORT } from "../config";
-
 // imports for mui
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
@@ -19,7 +17,6 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 const Register = () => {
   const navigate = useNavigate();
-
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -72,7 +69,7 @@ const Register = () => {
 
     try {
       const response = await axios.post(
-        `${SERVER_PORT}/api/user`,
+        `${import.meta.env.VITE_SERVER_PORT}/api/user`,
         data,
         config
       );
