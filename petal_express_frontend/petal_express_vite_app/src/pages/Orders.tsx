@@ -26,11 +26,8 @@ interface Order {
   flowers: Flower[];
   status: string;
 }
-interface OrdersProps {
-  orders: Order[];
-}
 
-const Orders = ({}: OrdersProps) => {
+const Orders = () => {
 
   const [orders, setOrders] = useState<Order[]>([]);
   const [snackbarOpen, setSnackbarOpen] = useState(false);
