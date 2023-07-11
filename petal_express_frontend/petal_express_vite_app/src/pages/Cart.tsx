@@ -248,7 +248,7 @@ const Cart = ({}: CartProps) => {
             align="right"
             style={{ margin: "20px" }}
           >
-            Total Price: ${calculateTotalPrice()} $ &nbsp;
+            Total Price: ${calculateTotalPrice()} &nbsp;
             <Button
               variant="contained"
               sx={{ backgroundColor: "#9C27B0" }}
