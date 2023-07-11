@@ -8,6 +8,8 @@ const cartSchema = mongoose.Schema(
     },
     f_id: { type: Number, required: true },
     quantity: { type: Number, required: true },
+    name: { type: String, required: true },
+    price: { type: String, required: true },
   },
   {
     timestamps: true,

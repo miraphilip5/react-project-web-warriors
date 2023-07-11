@@ -38,8 +38,8 @@ const Navigation = () => {
         <nav>
             <>
               <StyledNavLink to="/flowers">Home</StyledNavLink>
-              <StyledNavLink to="/orders">Orders</StyledNavLink>
               <StyledNavLink to="/cart">My Cart</StyledNavLink>
+              <StyledNavLink to="/orders">Orders</StyledNavLink>
               <Button
                 color="inherit"
                 onClick={handleLogout}

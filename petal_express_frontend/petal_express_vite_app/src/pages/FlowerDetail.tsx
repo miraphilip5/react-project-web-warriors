@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { SERVER_PORT } from "../config";
 import Button from "@mui/material/Button";
@@ -23,6 +23,7 @@ const FlowerDetail = () => {
   const [flower, setFlower] = useState<FlowerProp | null>(null);
   const [qty, setQty] = useState<string>("1");
   const [snackbarOpen, setSnackbarOpen] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchFlowerData = async () => {
@@ -49,10 +50,12 @@ const FlowerDetail = () => {
     try {
       const token = localStorage.getItem("token");
       const response = await axios.post(
-        `${SERVER_PORT}/api/cart/add`,
+        `${SERVER_PORT}/api/carts`,
         {
-          flowerId: flower?._id,
-          quantity: parseInt(qty),
+            f_id: flower?.f_id,
+            quantity: parseInt(qty),
+            name: flower?.name,
+            price: flower?.price
         },
         {
           headers: {
@@ -63,6 +66,7 @@ const FlowerDetail = () => {
       // Handle the response here, such as displaying a success message or updating the cart state
       console.log("Item added to cart:", response.data);
       setSnackbarOpen(true);
+      navigate("/flowers");
     } catch (error) {
       console.error("Error adding item to cart:", error);
     }

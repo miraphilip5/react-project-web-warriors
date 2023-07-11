@@ -1,10 +1,10 @@
 const Order = require('../models/orderModel');
 const { v4: uuidv4 } = require('uuid');
 const asyncHandler = require("express-async-handler");
-const {authenticatedUser} = require('./flowerController');
+const auth = require("../middleware/authMiddleware");
 
 // Place an order
-const placeOrder = [authenticatedUser, asyncHandler(async (req, res) => {
+const placeOrder = [auth, asyncHandler(async (req, res) => {
   try {
     const { flowers } = req.body;
     const orderId = uuidv4(); // Generate a unique order ID
@@ -17,7 +17,7 @@ const placeOrder = [authenticatedUser, asyncHandler(async (req, res) => {
 })];
 
 // Get all orders
-const getOrders = [authenticatedUser, asyncHandler(async (req, res) => {
+const getOrders = [auth, asyncHandler(async (req, res) => {
   try {
     const orders = await Order.find().populate('flowers');
     res.status(200).json(orders);
@@ -28,7 +28,7 @@ const getOrders = [authenticatedUser, asyncHandler(async (req, res) => {
 })];
 
 // Cancel an order
-const cancelOrder = [authenticatedUser, asyncHandler(async (req, res) => {
+const cancelOrder = [auth, asyncHandler(async (req, res) => {
   try {
     const { orderId } = req.params;
     const order = await Order.findByIdAndUpdate(
@@ -44,7 +44,7 @@ const cancelOrder = [authenticatedUser, asyncHandler(async (req, res) => {
 })];
 
 // Remove an order
-const removeOrder = [authenticatedUser, asyncHandler(async (req, res) => {
+const removeOrder = [auth, asyncHandler(async (req, res) => {
   try {
     const { orderId } = req.params;
     await Order.findByIdAndDelete(orderId);

@@ -134,7 +134,7 @@ const Orders = ({}: OrdersProps) => {
                               </Typography>
                               <br />
                               <Typography variant="body2" component="span">
-                                Price: ${flower.price} $
+                                Price: ${flower.price}
                               </Typography>
                             </Box>
                           }
