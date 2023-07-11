@@ -28,7 +28,7 @@ const saveToCart = [auth,asyncHandler(async (req, res) => {
 //   const u_id = new mongoose.Types.ObjectId("6487bc04e2665dfa761904d1");
 // since auth(middleware) stores the user info in the request (can be seen in the code of the middleware-authMiddleware.js)
 const u_id = req.user.id;
-  const { f_id, quantity } = req.body;
+  const { f_id, quantity, name, price } = req.body;
 
   try {
     // get carts with given u_id
@@ -51,6 +51,8 @@ const u_id = req.user.id;
           u_id,
           f_id,
           quantity,
+          name,
+          price
         });
 
         carts.push(newCartwithSameUserId);
@@ -62,6 +64,8 @@ const u_id = req.user.id;
         u_id,
         f_id,
         quantity,
+        name,
+        price
       });
 
       carts.push(newCartwithDifferentUserId);
@@ -95,7 +99,7 @@ const deleteCartByFlowerId = [auth,async (req, res) => {
 //   const u_id = new mongoose.Types.ObjectId("6487bc04e2665dfa761904d1");
 // since auth(middleware) stores the user info in the request (can be seen in the code of the middleware-authMiddleware.js)
 const u_id = req.user.id;
-  const f_id = Number(req.params.id); F
+  const f_id = Number(req.params.id);
 
   try {
     const carts = await cartModel.find({ u_id });
@@ -142,7 +146,10 @@ const u_id = req.user.id;
       res.status(200).json({ message: `Quantity for user ${u_id} and flower ${f_id} increased successfully` });
     } else if (operation === "reduce") {
       cartToUpdate.quantity -= 1;
-      await cartToUpdate.save();
+      if ( cartToUpdate.quantity >= 1)
+        await cartToUpdate.save();
+      else 
+        await cartToUpdate.deleteOne({f_id});
       res.status(200).json({ message: `Quantity for user ${u_id} and flower ${f_id} reduced successfully` });
     } else {
       res
@@ -152,7 +159,7 @@ const u_id = req.user.id;
         });
     }
   } catch (error) {
-    req.status(400).json({ error: error.message });
+    res.status(400).json({ error: error.message });
   }
 }];
 
