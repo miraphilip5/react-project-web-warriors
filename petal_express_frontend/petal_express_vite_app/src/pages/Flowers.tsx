@@ -2,10 +2,6 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
-interface FlowersProp {
-  flowers: FlowerProp[];
-}
-
 interface FlowerProp {
   category: string;
   color: string;
@@ -19,7 +15,7 @@ interface FlowerProp {
 }
 
 const Flowers = () => {
-  const [flowers, setFlowers] = useState<FlowersProp>();
+  const [flowers, setFlowers] = useState<FlowerProp[]>([]);
   const [loggedInUser, setLoggedInUser] = useState("");
 
   useEffect(() => {
@@ -61,8 +57,6 @@ const Flowers = () => {
     };
     fetchLoginUserData();
   }, []);
-
-  
 
   return (
     <>

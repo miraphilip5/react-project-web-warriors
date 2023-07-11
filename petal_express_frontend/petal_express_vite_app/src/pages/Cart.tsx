@@ -26,20 +26,8 @@ interface FlowerItem {
   f_id: number;
 }
 
-interface CartProps {
-  items: FlowerItem[];
-  onDelete: (id: string) => void;
-  onIncreaseQuantity: (id: string) => void;
-  onReduceQuantity: (id: string) => void;
-}
-
-const Cart = ({}: CartProps) => {
+const Cart = () => {
   const [flowerItems, setFlowerItems] = useState<FlowerItem[]>([]);
-  //useState([
-  // { "_id": "64869e3d5c469c1141654376", "name": "Jasmine", "count": 3, "price": 5.99 },
-  // { "_id": "64888d644e141ffe29700718", "name": "Sun flower", "count": 2, "price": 3.99 },
-  // { "_id": "648696e55c469c1141654368", "name": "Rose", "count": 1, "price": 7.99 },
-  // ]);
   const [snackbarOpen, setSnackbarOpen] = useState(false);
 
   const navigate = useNavigate();
