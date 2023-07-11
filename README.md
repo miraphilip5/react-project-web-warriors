@@ -1,9 +1,9 @@
-# Petal Express is an e-commerce platform that specializes in delivery of different types of flowers to its customers. 
+# Petal Express is an e-commerce platform specializing in delivering different types of flowers to its customers. 
 
 ## 	List of features 
   ## Kaiyan
-    - [x]	Flowers listing (Landing page) – list flowers and search feature
-    - [x]	Flower detail – detail information about a single product such as name, price, picture, stock, description, etc.
+    - [x]	Flowers listing (Landing page) – list flowers available from the database
+    - [x]	Flower detail – detailed information about a single product(flower) such as name, price, picture, stock, description, etc.
   ## Mira
     - [x]	Order Management 
         •	View current/historic order info
@@ -14,5 +14,5 @@
     - [x]	User Register/Login/Logout
         •	User authentication
     - [x]	Checkout process
-        •	Finalizing the orders and pay (personal info).
+        •	Finalizing the orders
 
