@@ -1,5 +1,5 @@
 # Petal Express is an e-commerce platform specializing in delivering different types of flowers to its customers. 
-
+## Deployed on vercel: https://petal-express-fe-git-main-miraphilip5.vercel.app
 ## 	List of features 
   ## Kaiyan
     - [x]	Flowers listing (Landing page) – list flowers available from the database
