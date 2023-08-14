@@ -166,7 +166,7 @@ const Cart = () => {
   }
 
   return (
-    <div style={{ marginTop: "10rem" }}>
+    <div style={{ marginTop: "2rem" }}>
       {flowerItems.length === 0 ? (
         <Typography variant="body1">Shopping cart empty!</Typography>
       ) : (
@@ -230,7 +230,7 @@ const Cart = () => {
           <Typography
             variant="h6"
             component="p"
-            align="right"
+            align="left"
             style={{ margin: "20px" }}
           >
             Total Price: ${calculateTotalPrice()} &nbsp;
