@@ -1,5 +1,6 @@
+import { CSSProperties } from '@material-ui/core/styles';
 const Footer = () => {
-  const footerStyle = {
+  const footerStyle : CSSProperties  = {
     backgroundColor: "#9c27b0",
     color: "white",
     textAlign: "center",
@@ -10,13 +11,13 @@ const Footer = () => {
     width: "100%",
   };
 
-  const footerContentStyle = {
+  const footerContentStyle : CSSProperties = {
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
   };
 
-  const iconStyle = {
+  const iconStyle : CSSProperties = {
     fontSize: "2rem",
     color: "white",
     margin: "0 10px",
@@ -24,12 +25,12 @@ const Footer = () => {
     transition: "color 0.3s",
   };
 
-  const copyrightStyle = {
+  const copyrightStyle : CSSProperties = {
     fontSize: "0.9rem",
     marginTop: "10px",
   };
 
-  const ulStyle = {
+  const ulStyle : CSSProperties = {
     display: "flex",
     margin: "0",
     padding: "0",
