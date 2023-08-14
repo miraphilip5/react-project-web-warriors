@@ -1,4 +1,4 @@
-import { CSSProperties } from '@material-ui/core/styles';
+import { CSSProperties } from '@mui/material/styles/createTypography';
 const Footer = () => {
   const footerStyle : CSSProperties  = {
     backgroundColor: "#9c27b0",
